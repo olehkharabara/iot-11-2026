@@ -148,9 +148,13 @@ class Cinema:
             and (max_price is None or m.ticket_price <= max_price)
         ]
         return max(candidates, key=lambda m: m.ranking, default=None)
-
+        
     def sort_by_release_date(self, reverse=False):
-        return sorted(self._movies, key=lambda m: m.release_date, reverse=reverse)
+        return sorted(
+            self._movies,
+            key=lambda m: m.release_date,
+            reverse=reverse,
+        )
 
     def show_movies(self):
         print(f"\nКінотеатр '{self._name}', {self._location}. Афіша:")
@@ -190,9 +194,11 @@ def main():
     day = date(2026, 11, 9)
     cinema.sell_tickets(m1, day, 50)
     cinema.sell_tickets(m3, day, 30)
-    print(f"\nПрибуток за {day}:")
-    print(f"  {m1.title}: {cinema.calculate_profit(m1, day)} грн")
-    print(f"  {m3.title}: {cinema.calculate_profit(m3, day)} грн")
+    print(
+    f"\nПрибуток за {day}:\n"
+    f" {m1.title}: {cinema.calculate_profit(m1, day)} грн\n"
+    f" {m3.title}: {cinema.calculate_profit(m3, day)} грн"
+    )
 
     m1.ticket_price = 200
     print("\nПісля зміни ціни квитка:", m1)
